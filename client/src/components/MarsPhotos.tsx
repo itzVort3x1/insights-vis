@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMarsPhotos } from "../store/nasaSlice.ts";
-import { AppDispatch, RootState } from "../store/store.ts";
+import { fetchMarsPhotos } from "../store/nasaSlice";
+import { AppDispatch, RootState } from "../store/store";
 
 // Define the component
 const MarsPhotos: React.FC = () => {
@@ -19,7 +19,7 @@ const MarsPhotos: React.FC = () => {
 
     return (
         <div>
-            <h2>Mars Rover Photos</h2>
+            <h2 className="text-blue-600">Mars Rover Photos</h2>
             {marsPhotos?.length ? (
                 marsPhotos
                     .slice(0, 10)

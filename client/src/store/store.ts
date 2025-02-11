@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import nasaReducer from "./nasaSlice.ts";
+import nasaReducer from "./nasaSlice";
 
 const store = configureStore({
     reducer: {

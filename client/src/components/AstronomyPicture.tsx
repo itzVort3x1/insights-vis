@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchApod } from "../store/nasaSlice.ts";
-import { AppDispatch, RootState } from "../store/store.ts";
+import { fetchApod } from "../store/nasaSlice";
+import { AppDispatch, RootState } from "../store/store";
 
 const AstronomyPicture: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
