@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5000/api/nasa";
+const API_BASE_URL = "http://localhost:4000/api";
 
 // Define the APOD response data structure
 interface ApodData {
@@ -37,7 +37,7 @@ export const fetchMarsPhotos = createAsyncThunk(
 );
 
 // Async thunk to fetch APOD
-export const fetchApod = createAsyncThunk("nasa/fetchApod", async () => {
+export const fetchApod = createAsyncThunk("/apod", async () => {
     const response = await axios.get<ApodData>(`${API_BASE_URL}/apod`);
     return response.data;
 });
