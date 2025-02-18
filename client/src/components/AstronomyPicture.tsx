@@ -18,7 +18,7 @@ const AstronomyPicture: React.FC = () => {
     if (error) return <p>Error: {error}</p>;
 
     return apod ? (
-        <div>
+        <div className="bg-gray-800">
             <TabsDemo />
             <h2>{apod.title}</h2>
             <img src={apod.url} alt={apod.title} style={{ width: "100%" }} />
