@@ -29,7 +29,7 @@ const initialState: NasaState = {
 };
 
 export const fetchMarsPhotos = createAsyncThunk(
-    "nasa/fetchMarsPhotos",
+    "/fetchMarsPhotos",
     async () => {
         const response = await axios.get<MarsPhoto[]>(`${API_BASE_URL}/mars`);
         return response.data;

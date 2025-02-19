@@ -1,57 +1,44 @@
 import React from "react";
 import { Tabs } from "./ui/Tabs";
 
-const TabsDemo = () => {
+interface TabsDemoProps {
+    apod?: any;
+}
+
+const TabsDemo = ({ apod }: TabsDemoProps) => {
     const tabs = [
         {
-            title: "Product",
+            title: "APOD",
             value: "product",
             content: (
-                <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-                    <p>Product Tab</p>
-                </div>
-            ),
-        },
-        {
-            title: "Services",
-            value: "services",
-            content: (
-                <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-                    <p>Services tab</p>
-                </div>
-            ),
-        },
-        {
-            title: "Playground",
-            value: "playground",
-            content: (
-                <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-                    <p>Playground tab</p>
-                </div>
-            ),
-        },
-        {
-            title: "Content",
-            value: "content",
-            content: (
-                <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-                    <p>Content tab</p>
-                </div>
-            ),
-        },
-        {
-            title: "Random",
-            value: "random",
-            content: (
-                <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-                    <p>Random tab</p>
+                <div className="w-full h-full md:h-full overflow-hidden relative rounded-2xl text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900 group">
+                    {/* Background Image */}
+                    <img
+                        src={apod.url ?? ""}
+                        alt="APOD image"
+                        className="absolute inset-0 w-full h-full object-cover"
+                    />
+
+                    {/* Overlay for better text visibility */}
+                    <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+
+                    {/* Title */}
+                    <p className="absolute top-4 left-4 z-10">{apod.title}</p>
+
+                    {/* Hidden Explanation (Slides Up on Hover) */}
+                    <div
+                        className="absolute bottom-0 left-0 w-full bg-black bg-opacity-75 p-4 text-white text-base transform translate-y-full transition-transform duration-300 group-hover:translate-y-0 
+        max-h-60 md:max-h-12 sm:max-h-12 overflow-y-auto scrollbar-hide"
+                    >
+                        <p>{apod.explanation}</p>
+                    </div>
                 </div>
             ),
         },
     ];
 
     return (
-        <div className="h-[20rem] md:h-[40rem] [perspective:1000px] relative b flex flex-col max-w-5xl mx-auto w-full items-start justify-start">
+        <div className="h-[20rem] md:h-[40rem] [perspective:1000px] relative b flex flex-col py-10 px-10 w-full items-start justify-start">
             <Tabs tabs={tabs} />
         </div>
     );
