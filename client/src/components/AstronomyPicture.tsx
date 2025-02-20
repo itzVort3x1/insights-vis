@@ -4,6 +4,7 @@ import { fetchApod } from "../store/nasaSlice";
 import { AppDispatch, RootState } from "../store/store";
 import { MacbookScrollDemo } from "./macbookScroll";
 import { ParallaxScrollDemo } from "./ScrollLayout";
+import AsteroidTracker from "./asteroidTracker";
 
 const AstronomyPicture: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -27,6 +28,7 @@ const AstronomyPicture: React.FC = () => {
                 </p>
             </div>
             <ParallaxScrollDemo />
+            <AsteroidTracker />
         </div>
     ) : null;
 };
