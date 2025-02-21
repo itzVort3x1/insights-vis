@@ -19,22 +19,16 @@ interface NasaState {
     apod: ApodData | null;
     loading: boolean;
     error: string | null;
-    marsPhotos?: MarsPhoto[];
+    marsPhotos: MarsPhoto[];
 }
 
+// Initialize the state
 const initialState: NasaState = {
     apod: null,
     loading: false,
     error: null,
+    marsPhotos: [],
 };
-
-export const fetchMarsPhotos = createAsyncThunk(
-    "/fetchMarsPhotos",
-    async () => {
-        const response = await axios.get<MarsPhoto[]>(`${API_BASE_URL}/mars`);
-        return response.data;
-    }
-);
 
 // Async thunk to fetch APOD
 export const fetchApod = createAsyncThunk("/apod", async () => {
@@ -42,12 +36,24 @@ export const fetchApod = createAsyncThunk("/apod", async () => {
     return response.data;
 });
 
+// Async thunk to fetch Mars photos
+export const fetchMarsPhotos = createAsyncThunk(
+    "/fetchMarsPhotos",
+    async () => {
+        const response = await axios.get<MarsPhoto[]>(
+            `${API_BASE_URL}/fetchMarsPhotos`
+        );
+        return response.data;
+    }
+);
+
 const nasaSlice = createSlice({
     name: "nasa",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
+            // APOD
             .addCase(fetchApod.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -63,6 +69,24 @@ const nasaSlice = createSlice({
                 state.loading = false;
                 state.error =
                     action.error.message || "Failed to fetch APOD data.";
+            })
+
+            // Mars Photos
+            .addCase(fetchMarsPhotos.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(
+                fetchMarsPhotos.fulfilled,
+                (state, action: PayloadAction<MarsPhoto[]>) => {
+                    state.loading = false;
+                    state.marsPhotos = action.payload;
+                }
+            )
+            .addCase(fetchMarsPhotos.rejected, (state, action) => {
+                state.loading = false;
+                state.error =
+                    action.error.message || "Failed to fetch Mars photos.";
             });
     },
 });

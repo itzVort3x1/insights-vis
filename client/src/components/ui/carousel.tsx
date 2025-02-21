@@ -5,7 +5,7 @@ import { useState, useRef, useId, useEffect } from "react";
 interface SlideData {
     title: string;
     button: string;
-    src: string;
+    img_src: string;
 }
 
 interface SlideProps {
@@ -62,7 +62,9 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
         event.currentTarget.style.opacity = "1";
     };
 
-    const { src, button, title } = slide;
+    const { img_src, title } = slide;
+
+    console.log(img_src);
 
     return (
         <div className="[perspective:1200px] [transform-style:preserve-3d]">
@@ -96,7 +98,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
                             opacity: current === index ? 1 : 0.5,
                         }}
                         alt={title}
-                        src={src}
+                        src={img_src}
                         onLoad={imageLoaded}
                         loading="eager"
                         decoding="sync"
@@ -175,6 +177,8 @@ export function Carousel({ slides }: CarouselProps) {
     };
 
     const id = useId();
+
+    console.log(slides);
 
     return (
         <div
