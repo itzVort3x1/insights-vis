@@ -1,40 +1,49 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-// import { fetchAsteroidsData } from "../store/nasaSlice";
-import { RootState, AppDispatch } from "../store/store";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
+import React, { useState } from "react";
+import WeekSelector from "./weekSelector";
+import { BarChart, XAxis, YAxis, Tooltip, CartesianGrid, Bar } from "recharts";
+import { getCurrentMonday } from "../utilities/weekSelector";
 
-const AsteroidTracker: React.FC = () => {
-    const dispatch: AppDispatch = useDispatch();
-    // const { asteroids, loading } = useSelector(
-    //     (state: RootState) => state.nasa
-    // );
+export default function AsteroidTracker() {
+    const [selectedDate, setSelectedDate] = useState<Date | null>(
+        getCurrentMonday()
+    );
 
-    // useEffect(() => {
-    //     dispatch(fetchAsteroidsData());
-    // }, [dispatch]);
+    const handleWeekSelect = (date: Date) => {
+        setSelectedDate(date);
+    };
 
-    // const chartData = asteroids.map((asteroid) => ({
-    //     name: asteroid.name,
-    //     size: asteroid.estimated_diameter.kilometers.estimated_diameter_max,
-    // }));
+    console.log("selectedDate", selectedDate);
 
     return (
-        <div>
-            <h2>Near-Earth Asteroid Tracker</h2>
-            {false ? (
-                <p>Loading...</p>
-            ) : (
-                <BarChart width={600} height={300} data={[]}>
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                    <Bar dataKey="size" fill="#8884d8" />
-                </BarChart>
+        <div className="py-10">
+            <div className="flex justify-center">
+                <h2 className="text-2xl font-bold">
+                    Near-Earth Asteroid Tracker
+                </h2>
+            </div>
+
+            {/* Pass callback down to get the selected date from the child */}
+            <WeekSelector
+                onWeekSelect={handleWeekSelect}
+                selectedDate={selectedDate}
+            />
+
+            {/* Use the selectedWeek state for display/debug, or in data fetching */}
+            {selectedDate && (
+                <p>
+                    Currently selected start of the week:{" "}
+                    {selectedDate.toDateString()}
+                </p>
             )}
+
+            {/* Example BarChart - update data based on selectedWeek as needed */}
+            <BarChart width={600} height={300} data={[]}>
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                <Bar dataKey="size" fill="#8884d8" />
+            </BarChart>
         </div>
     );
-};
-
-export default AsteroidTracker;
+}
