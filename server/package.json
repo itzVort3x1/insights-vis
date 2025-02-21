@@ -4,12 +4,13 @@
     "main": "index.js",
     "scripts": {
         "start": "nodemon index.js",
-        "test": "jest --detectOpenHandles --forceExit"
+        "test": "jest"
     },
     "author": "",
     "license": "ISC",
     "description": "",
     "dependencies": {
+        "@types/supertest": "^6.0.2",
         "axios": "^1.7.9",
         "cors": "^2.8.5",
         "dotenv": "^16.4.7",
