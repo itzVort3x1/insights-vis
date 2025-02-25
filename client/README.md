@@ -18,20 +18,11 @@ A React-based web application that visualizes space-related data from NASA APIs,
 
 ### **3. Near-Earth Asteroid Tracker ☄️**
 
--   **Bar Chart visualization** showing asteroids near Earth.
+-   **visualization** showing asteroids near Earth.
 -   Users can **select a week** to filter asteroid data.
 -   Implemented with:
-    -   **Recharts** (for data visualization)
     -   **Redux Toolkit** (for managing API data)
     -   **Week Selector Component** (for date filtering)
-
----
-
-## 📊 **Visualizations Used**
-
--   **Bar Chart (Recharts)** – Displays asteroid data over time.
--   **Carousel (ShadCN/UI)** – Showcases Mars rover images interactively.
--   **Macbook Scroll Effect** – Enhances the APOD feature.
 
 ---
 
