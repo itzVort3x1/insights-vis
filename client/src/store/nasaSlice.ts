@@ -20,6 +20,7 @@ interface NasaState {
     loading: boolean;
     error: string | null;
     marsPhotos: MarsPhoto[];
+    asteroidData: any;
 }
 
 // Initialize the state
@@ -28,6 +29,7 @@ const initialState: NasaState = {
     loading: false,
     error: null,
     marsPhotos: [],
+    asteroidData: null,
 };
 
 // Async thunk to fetch APOD
@@ -43,6 +45,16 @@ export const fetchMarsPhotos = createAsyncThunk(
         const response = await axios.get<MarsPhoto[]>(
             `${API_BASE_URL}/fetchMarsPhotos`
         );
+        return response.data;
+    }
+);
+
+export const fetchAstroidData = createAsyncThunk(
+    "/fetchAsteroids",
+    async (date: Date | null) => {
+        const response = await axios.get(`${API_BASE_URL}/fetchAsteroids`, {
+            params: { date },
+        });
         return response.data;
     }
 );
@@ -87,6 +99,19 @@ const nasaSlice = createSlice({
                 state.loading = false;
                 state.error =
                     action.error.message || "Failed to fetch Mars photos.";
+            })
+            .addCase(fetchAstroidData.fulfilled, (state, action) => {
+                state.loading = false;
+                state.asteroidData = action.payload;
+            })
+            .addCase(fetchAstroidData.rejected, (state, action) => {
+                state.loading = false;
+                state.error =
+                    action.error.message || "Failed to fetch Asteroid data.";
+            })
+            .addCase(fetchAstroidData.pending, (state, action) => {
+                state.loading = true;
+                state.error = null;
             });
     },
 });

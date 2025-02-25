@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchApod, fetchMarsPhotos } from "../store/nasaSlice"; // <-- import the Mars photos thunk
+import {
+    fetchApod,
+    fetchAstroidData,
+    fetchMarsPhotos,
+} from "../store/nasaSlice"; // <-- import the Mars photos thunk
 import { AppDispatch, RootState } from "../store/store";
 import { MacbookScrollDemo } from "./macbookScroll";
 import AsteroidTracker from "./asteroidTracker";
 import { CarouselDemo } from "./imageCarousel";
+import { getCurrentMonday } from "../utilities/weekSelector";
 
 const AstronomyPicture: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -18,6 +23,7 @@ const AstronomyPicture: React.FC = () => {
         // Fetch both APOD and Mars Photos
         dispatch(fetchApod());
         dispatch(fetchMarsPhotos());
+        dispatch(fetchAstroidData(getCurrentMonday()));
     }, [dispatch]);
 
     if (loading) return <p>Loading...</p>;
