@@ -26,4 +26,8 @@ router.get("/apod", async (req, res) => {
     }
 });
 
+router.get("/", (req, res) => {
+    res.send("Welcome to the NASA API server!");
+});
+
 export { router as apodRouter };
