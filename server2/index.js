@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 // Use the router for all routes starting at "/"
-app.use("/api", apodRouter);
+app.use("/", apodRouter);
 
 // Start the server
 app.listen(PORT, () => {
