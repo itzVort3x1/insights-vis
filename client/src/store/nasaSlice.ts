@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:4000/api";
+const API_BASE_URL = "https://insights-vis.vercel.app/api";
 
 // Define the APOD response data structure
 interface ApodData {
