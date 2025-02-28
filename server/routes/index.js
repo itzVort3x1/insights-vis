@@ -88,4 +88,8 @@ router.get("/fetchAsteroids", async (req, res) => {
     }
 });
 
+router.get("/", (req, res) => {
+    return res.status(200).json({ message: "Welcome to the NASA API" });
+});
+
 export default router;
