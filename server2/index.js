@@ -17,9 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 // Use the router for all routes starting at "/"
-app.get("/", (req, res) => {
-    res.send("Welcome to the NASA API server!");
-});
+app.use("/", apodRouter);
 
 // Start the server
 app.listen(PORT, () => {
