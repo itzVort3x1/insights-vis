@@ -30,17 +30,25 @@ export default function AsteroidTracker() {
     };
 
     const orderedDates = orderDates(
-        Object.keys(asteroidData.near_earth_objects)
+        Object.keys(asteroidData?.near_earth_objects || {})
     );
 
-    console.log("Asteroid Data: ", asteroidData);
+    console.log(asteroidData);
 
     // useEffect(() => {
-    //     if (!hasFetched.current) {
+    //     if (selectedDate) {
     //         dispatch(fetchAstroidData(selectedDate));
-    //         hasFetched.current = true; // Set to true after the first call
     //     }
-    // }, []); // Empty dependency array ensures it runs only once
+    // }, [selectedDate, dispatch]);
+
+    // const lastFetchedDate = useRef<Date | null>(null);
+
+    // useEffect(() => {
+    //     if (selectedDate && selectedDate !== lastFetchedDate.current) {
+    //         dispatch(fetchAstroidData(selectedDate));
+    //         lastFetchedDate.current = selectedDate;
+    //     }
+    // }, [selectedDate, dispatch]);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;

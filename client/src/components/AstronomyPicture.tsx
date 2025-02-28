@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     fetchApod,
@@ -13,9 +13,12 @@ import { getCurrentMonday } from "../utilities/weekSelector";
 
 const AstronomyPicture: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
+    const [selectedDate, setSelectedDate] = useState<Date | null>(
+        getCurrentMonday()
+    );
 
     // Grab all necessary data from the store
-    const { apod, marsPhotos, loading, error } = useSelector(
+    const { apod, marsPhotos, asteroidData, loading, error } = useSelector(
         (state: RootState) => state.nasa
     );
 
@@ -23,8 +26,8 @@ const AstronomyPicture: React.FC = () => {
         // Fetch both APOD and Mars Photos
         dispatch(fetchApod());
         dispatch(fetchMarsPhotos());
-        dispatch(fetchAstroidData(getCurrentMonday()));
-    }, [dispatch]);
+        dispatch(fetchAstroidData(selectedDate));
+    }, [dispatch, selectedDate]);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
