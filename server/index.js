@@ -16,6 +16,10 @@ app.use(cors());
 // Parse JSON
 app.use(express.json());
 
+app.get("/", (req, res) => {
+    res.send("Welcome to the NASA API Proxy Server");
+});
+
 // Use the router for all routes starting at "/"
 app.use("/api", router);
 
